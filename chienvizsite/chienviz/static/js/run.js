@@ -9,6 +9,7 @@ var info = $(".subway-map").subwayMap({ debug: true });
 var stations = info[0].stations;
 var lines = info[0].lines;
 var paths = info[0].paths;
+var tweet_ids_dict;
 
 // URL for ajax request
 var ajax_url = "/ajax/get_train_info/"
@@ -154,6 +155,8 @@ $("button#time_button").click(function() {
             var animated = {};
             tweets = response.tweets;
             troubles = response.troubles;
+            console.log("Troubles: " + troubles.length);
+            console.log("Tweets: " + tweets.length);
             for (var key in lines) {
                 if (lines.hasOwnProperty(key)) {
                     lines[key].stop();
@@ -168,8 +171,26 @@ $("button#time_button").click(function() {
                     } // if
                 } // for
             } // for
-            console.log("Troubles: " + troubles.length);
-            console.log("Tweets: " + tweets.length);
+            tweet_ids_dict = {};
+            for (var i = 0; i < tweets.length; i++) {
+                var id_str = tweets[i].id_str;
+                var t_stations = tweets[i].stations;
+                var t_lines = tweets[i].lines;
+                for (var j = 0; j < t_stations.length; j++) {
+                    if (!(t_stations[i] in tweet_ids_dict)) {
+                        tweet_ids_dict[t_stations[j]] = [id_str];
+                    } else {
+                        tweet_ids_dict[t_stations[j]].push(id_str);
+                    } // else
+                } // for
+                for (var j = 0; j < t_lines.length; j++) {
+                    if (!(t_lines[i] in tweet_ids_dict)) {
+                        tweet_ids_dict[t_lines[j]] = [id_str];
+                    } else {
+                        tweet_ids_dict[t_lines[j]].push(id_str);
+                    } // else
+                } // for
+            } // for
         }
     });
 });

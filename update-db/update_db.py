@@ -53,7 +53,7 @@ def tweet_extract_info(text):
     return lines, stations
 
 def train_trouble_is_valuable(trouble):
-    for key in data_dict.company_dict:
+    for key, value in data_dict.company_dict.items():
         if trouble['company'] == key:
             return True
     return False
