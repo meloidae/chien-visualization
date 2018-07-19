@@ -67,6 +67,10 @@ Station.prototype.removeClass = function(class_name) {
     this.tag.removeClass(class_name);
 };
 
+Station.prototype.show_tweets = function() {
+    
+};
+
 function Path(name, line_name, svg) {
     this.name = name;
     this.line_name = line_name;

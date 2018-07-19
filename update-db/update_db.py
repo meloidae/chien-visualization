@@ -102,7 +102,7 @@ def main():
     trouble_lines = []
     for trouble in troubles:
         if train_trouble_is_valuable(trouble):
-            for key, value in line_dict:
+            for key, value in data_dict.line_dict.items():
                 line_name = trouble['name']
                 if line_name in value:
                     trouble_lines.append(key)
