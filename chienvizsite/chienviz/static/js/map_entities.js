@@ -4,6 +4,7 @@ function Station(name, coords, svg) {
     var self = this;
     this.name = name;
     this.coords = coords; 
+    this.ids = [];
     if (!(svg == null)) {
         this.svg = svg;
         this.svg.on('mouseover', function() {
@@ -61,6 +62,7 @@ function Path(name, line_name, svg) {
     this.name = name;
     this.line_name = line_name;
     var self = this;
+    this.ids = [];
     if (!(svg == null)) {
         this.svg = svg;
         this.color = this.svg.attr('stroke');
@@ -102,6 +104,7 @@ function Line(name, group, color) {
     this.group = group;
     this.color = color;
     this.animated = false;
+    this.ids = [];
 }
 
 Line.prototype.toggleAnimation = function() {
