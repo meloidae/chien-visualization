@@ -19,7 +19,7 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     path('index/', include('chienviz.urls')),
-    path('ajax/get_tweets/', include('chienviz.ajax_urls')),
+    path('ajax/get_train_info/', include('chienviz.ajax_urls')),
     path('admin/', admin.site.urls),
     re_path(r'^.*', RedirectView.as_view(permanent=False,   url='/index/')),
 ]

@@ -289,17 +289,29 @@ THE SOFTWARE.
             $(ul).remove();
         });
         // Construct line groups (paths grouped together as train lines)        
-        for (var i = 0; i < this._paths.storage.length; i++) {
-            var path = this._paths[i];
-            var line_name = path.line_name;
-            if (!(line_name in this._lines)) {
-                var ctx = this._getSVGCanvas(el);
-                var group = ctx.group();
-                group.add(path.svg);
-                this._lines[line_name] = new Line(line_name, group);
-            } else {
-                this._lines[line_name].group.add(path.svg); 
-            } // else
+        for (var key in this._paths.storage) {
+            if (this._paths.storage.hasOwnProperty(key)) {
+                var path_arr = this._paths.storage[key];
+                for (var i = 0; i < path_arr.length; i++) {
+                    var path = path_arr[i];
+                    var line_name = path.line_name;
+                    if (!(line_name in this._lines)) {
+                        var ctx = this._getSVGCanvas(el);
+                        var group = ctx.group();
+                        //console.log(path);
+                        group.add(path.svg);
+                        this._lines[line_name] = new Line(line_name, group, path.svg.attr('color'));
+                    } else {
+                        this._lines[line_name].group.add(path.svg); 
+                    } // else
+                } // for
+            } // if
+        } // for
+
+        for (var key in this._lines) {
+            if (this._lines.hasOwnProperty(key)) {
+                this._lines[key].group.back();
+            } // if
         } // for
 
         // Draw Grid
@@ -625,15 +637,18 @@ THE SOFTWARE.
             //+ "width: 40px;"
             //+ (pos != "" ? pos : "") + ";position:absolute;top:" + (y + el.offset().top - (topOffset > 0 ? topOffset : 0)) + "px;left:" + (x + el.offset().left) + "px;z-index:3000;'";
             + (pos != "" ? pos : "") + ";position:absolute;top:" + (y) + "px;left:" + (x) + "px;z-index:3000;'";
+        var marker_tag;
         if (data.link != "")
-            $("<a " + style + " title='" + data.title.replace(/\\n/g,"<br />") + "' href='" + data.link + "' target='_new'>" + data.label.replace(/\\n/g,"<br />") + "</span>").appendTo(el);
+            marker_tag = $("<a " + style + " title='" + data.title.replace(/\\n/g,"<br />") + "' href='" + data.link + "' target='_new'>" + data.label.replace(/\\n/g,"<br />") + "</span>");
         else
-            $("<span " + style + ">" + data.label.replace(/\\n/g,"<br />") + "</span>").appendTo(el);
+            marker_tag = $("<span " + style + ">" + data.label.replace(/\\n/g,"<br />") + "</span>");
+        marker_tag.appendTo(el);
         // if (!(this._stations.hasKey(data.label))) {
         //     this._stations.set([data.label, coords], new Station(data.label, coords, arc)); 
         // } // if
         //console.log(data.label);
         this._stations.get(data.label).setSVG(arc);
+        this._stations.get(data.label).setTag(marker_tag);
         return arc;
 
     },

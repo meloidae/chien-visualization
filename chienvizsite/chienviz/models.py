@@ -53,7 +53,7 @@ class Tweet(models.Model):
 
 class TrainTrouble(models.Model):
     created_at = models.DateTimeField(default=datetime.now, blank=True)
-    line = models.CharField(default="", max_length=20);
+    lines = ListField(blank=True);
 
 
 # class Test(models.Model):

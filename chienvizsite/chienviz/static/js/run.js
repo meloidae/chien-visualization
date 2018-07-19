@@ -6,9 +6,12 @@ function isValidDate(s) {
 }
 
 var info = $(".subway-map").subwayMap({ debug: true });
-var stations = info.stations;
-var lines = info.lines;
-var paths = info.paths;
+var stations = info[0].stations;
+var lines = info[0].lines;
+var paths = info[0].paths;
+
+// URL for ajax request
+var ajax_url = "/ajax/get_train_info/"
 
 // Generate options for time select
 var start_year = 2018;
@@ -53,12 +56,12 @@ var select_from = $("select#month_from");
 for (var i = 0; i < 12; i++) {
     var month = i + 1; 
     select_to.append($("<option>", {
-        value: i,
+        value: month,
         text: "" + month,
         selected: i == time_jst_to.getMonth() 
     }));
     select_from.append($("<option>", {
-        value: i,
+        value: month,
         text: "" + month,
         selected: i == time_jst_from.getMonth() 
     }));
@@ -114,3 +117,59 @@ for (var i = 0; i < 12; i++) {
     }));
 } // for
 
+
+//console.log(lines);
+
+
+$("button#time_button").click(function() {
+    var year_to = parseInt($("select#year_to").val());
+    var month_to = parseInt($("select#month_to").val());
+    var date_to = parseInt($("select#date_to").val());
+    var hours_to = parseInt($("select#hours_to").val());
+    var minutes_to = parseInt($("select#minutes_to").val());
+
+    var year_from = parseInt($("select#year_from").val());
+    var month_from = parseInt($("select#month_from").val());
+    var date_from = parseInt($("select#date_from").val());
+    var hours_from = parseInt($("select#hours_from").val());
+
+    data = {
+        'year_to': year_to,
+        'month_to': month_to,
+        'date_to': date_to,
+        'hours_to': hours_to,
+        'minutes_to': minutes_to,
+        'year_from': year_from,
+        'month_from': month_from,
+        'date_from': date_from,
+        'hours_from': hours_from,
+        'minutes_from': minutes_from
+    };
+    $.ajax({
+        url: ajax_url,
+        type: 'GET',
+        data: data,
+        dataType: 'json',
+        success: function(response) {
+            var animated = {};
+            tweets = response.tweets;
+            troubles = response.troubles;
+            for (var key in lines) {
+                if (lines.hasOwnProperty(key)) {
+                    lines[key].stop();
+                } // if
+            } // for
+            for (var i = 0; i < troubles.length; i++) {
+                trouble_lines = troubles[i].lines;
+                for (var j = 0; j < trouble_lines.length; j++) {
+                    if (!(trouble_lines[j] in animated)) {
+                        lines[trouble_lines[j]].animate();
+                        animated[trouble_lines[j]] = true;
+                    } // if
+                } // for
+            } // for
+            console.log("Troubles: " + troubles.length);
+            console.log("Tweets: " + tweets.length);
+        }
+    });
+});

@@ -3,3 +3,5 @@
 chienviz/__pycache__
 chienvizsite/__pycache__
 update-db/config.py
+*.swp
+*.swo

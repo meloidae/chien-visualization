@@ -230,3 +230,7 @@ line_dict["東京メトロ有楽町線"] = ["有楽町線"]
 line_dict["東京メトロ半蔵門線"] = ["半蔵門線"]
 line_dict["東京メトロ南北線"] = ["南北線"]
 line_dict["東京メトロ副都心線"] = ["副都心線"]
+
+company_dict = {}
+company_dict["東京メトロ"] = ["メトロ"]
+company_dict["都営地下鉄"] = ["都営"]
