@@ -94,6 +94,7 @@ def main():
                     # Set timezone to JST
                     #dt = dt - timedelta(seconds=utc_offset) + jst_offset
                     lines, stations = tweet_extract_info(text)
+                    text = bytes(text, 'utf-8').decode('utf-8', 'ignore')
                     tweet_entry = Tweet(tweet_id=id_str, created_at=dt, text=text,
                             stations=stations, lines=lines)
                     tweet_entry.save()

@@ -17,6 +17,9 @@ function Station(name, coords, svg) {
             // this.fill('#ee0000');
             self.removeClass('opaque');
         });
+        this.svg.on('click', function() {
+            self.show_tweets();
+        });
     } // if
     
 } // Station
@@ -35,6 +38,9 @@ Station.prototype.setSVG = function(svg) {
         self.removeClass('opaque');
         // this.fill('#ee0000');
     });
+    this.svg.on('click', function() {
+        self.show_tweets();
+    });
 }; // Station.setSVG
 
 Station.prototype.setTag = function(tag) {
@@ -45,6 +51,9 @@ Station.prototype.setTag = function(tag) {
     });
     tag.on('mouseout', function() {
         self.removeClass('opaque');
+    });
+    tag.on('click', function() {
+        self.show_tweets();
     });
 };
 
@@ -104,7 +113,7 @@ function Line(name, group, color) {
     this.group = group;
     this.color = color;
     this.animated = false;
-    this.ids = [];
+//    this.ids = [];
 }
 
 Line.prototype.toggleAnimation = function() {

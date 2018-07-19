@@ -12,7 +12,7 @@ var paths = info[0].paths;
 var tweet_ids_dict;
 
 // URL for ajax request
-var ajax_url = "/ajax/get_train_info/"
+var ajax_train_info_url = "/ajax/get_train_info/"
 
 // Generate options for time select
 var start_year = 2018;
@@ -147,7 +147,7 @@ $("button#time_button").click(function() {
         'minutes_from': minutes_from
     };
     $.ajax({
-        url: ajax_url,
+        url: ajax_train_info_url,
         type: 'GET',
         data: data,
         dataType: 'json',
