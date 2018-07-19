@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 . /home/dbclass/.bashrc
 cd /home/dbclass/chien-viz/update-db
