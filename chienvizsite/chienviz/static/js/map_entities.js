@@ -106,13 +106,11 @@ Station.prototype.show_tweets = function() {
         } // for
         console.log('done');
         $("#sidebar-content").hide();
-        $("#sidebar-content").on('load', function(e) {
-            $("#sidebar-content").toggle();
-            $("#sidebar-content").off('load');
-        });
         $("#sidebar-content").html(tweet_stack);
         twttr.widgets.load(
             document.getElementById("sidebar-content")
+        ).then(
+            $("#sidebar-content").show();
         );
         //$("#sidebar-content").show();
     });
