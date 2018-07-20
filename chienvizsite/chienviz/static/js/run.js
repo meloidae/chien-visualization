@@ -1,6 +1,6 @@
 var tweet_ids_dict;
 var tweet_htmls;
-var oembed_url = "https://publish/twitter.com/oembed";
+var oembed_url = "https://publish.twitter.com/oembed";
 var status_base_url = "https://twitter.com/Interior/status/"; // user id doesn't matter
 
 // Checks d/m/y
