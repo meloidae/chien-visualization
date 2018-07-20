@@ -99,6 +99,11 @@ Station.prototype.show_tweets = function() {
                 tweet_htmls[id_str] = html;
             } // if
         } // for
+        var tweet_stack = "";
+        for (var i = 0; i < tweet_ids.length; i++) {
+            tweet_stack += tweet_htmls[tweet_ids[i]]; 
+        } // for
+        $("#sidebar-content").innerHTML = tweet_stack;
     });
 };
 
