@@ -9,22 +9,7 @@
     <script type="text/javascript" src="{% static 'js/data_dict.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/map_entities.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery.subwayMap-0.5.0.js' %}"></script>
-    <script>window.twttr = (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0],
-          t = window.twttr || {};
-        if (d.getElementById(id)) return t;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://platform.twitter.com/widgets.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      
-        t._e = [];
-        t.ready = function(f) {
-          t._e.push(f);
-        };
-      
-        return t;
-    }(document, "script", "twitter-wjs"));</script>
+    
     <link rel="stylesheet" type="text/css" href="{% static 'css/subwaymap.css' %}" />
 </head>
 <body>
@@ -445,6 +430,22 @@
         <div id="sidebar-content"></div>
     </div>
     <div id="legend"></div>
+    <script>window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+          t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      
+        t._e = [];
+        t.ready = function(f) {
+          t._e.push(f);
+        };
+      
+        return t;
+    }(document, "script", "twitter-wjs"));</script>
     <script type="text/javascript" src="{% static 'js/run.js' %}"></script>
 </body>
 </html>
