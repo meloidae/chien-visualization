@@ -82,7 +82,7 @@ Station.prototype.show_tweets = function() {
                 type: 'GET',
                 data: {
                     'url': (status_base_url + id_str),
-                    'maxwidth': 220,
+                    'maxwidth': 300,
                     'omit_script': true
                 },
                 dataType: 'jsonp',
@@ -105,10 +105,12 @@ Station.prototype.show_tweets = function() {
             tweet_stack += tweet_htmls["" + tweet_ids[i]]; 
         } // for
         console.log('done');
+        $("#sidebar-content").hide();
         $("#sidebar-content").html(tweet_stack);
         twttr.widgets.load(
             document.getElementById("sidebar-content")
         );
+        $("#sidebar-content").hide();
     });
 };
 
