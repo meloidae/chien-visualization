@@ -103,6 +103,7 @@ Station.prototype.show_tweets = function() {
         for (var i = 0; i < tweet_ids.length; i++) {
             tweet_stack += tweet_htmls[tweet_ids[i]]; 
         } // for
+        console.log('done');
         $("#sidebar-content").innerHTML = tweet_stack;
     });
 };
