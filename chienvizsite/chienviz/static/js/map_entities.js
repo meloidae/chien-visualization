@@ -75,7 +75,7 @@ Station.prototype.show_tweets = function() {
     tweet_ids = tweet_ids_dict[this.name];
     var dfd_arr = [];
     for (var i = 0; i < tweet_ids.length; i++) {
-        var id_str = tweet_ids[i];
+        var id_str = "" + tweet_ids[i];
         if (!(id_str in tweet_htmls)) {
             var dfd = $.ajax({
                 url: oembed_url,
@@ -96,15 +96,15 @@ Station.prototype.show_tweets = function() {
                 var json = arguments[i][0];
                 var html = json.html;
                 var id_str = /[^/]*$/.exec(json.url)[0];
-                tweet_htmls[id_str] = html;
+                tweet_htmls["" + id_str] = html;
             } // if
         } // for
         var tweet_stack = "";
         for (var i = 0; i < tweet_ids.length; i++) {
-            tweet_stack += tweet_htmls[tweet_ids[i]]; 
+            tweet_stack += tweet_htmls["" + tweet_ids[i]]; 
         } // for
         console.log('done');
-        $("#sidebar-content").innerHTML = tweet_stack;
+        $("#sidebar-content").html(tweet_stack);
     });
 };
 

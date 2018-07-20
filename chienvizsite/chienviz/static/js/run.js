@@ -128,8 +128,8 @@ for (var i = 0; i < 12; i++) {
 
 //console.log(lines);
 
-stations.get('新宿').notify();
-stations.get('渋谷').notify();
+// stations.get('新宿').notify();
+// stations.get('渋谷').notify();
 
 
 $("button#time_button").click(function() {
