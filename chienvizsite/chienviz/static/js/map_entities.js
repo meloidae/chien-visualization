@@ -4,7 +4,7 @@ function Station(name, coords, svg) {
     var self = this;
     this.name = name;
     this.coords = coords; 
-    this.ids = [];
+    this.notified = false;
     if (!(svg == null)) {
         this.svg = svg;
         this.svg.on('mouseover', function() {
@@ -39,7 +39,9 @@ Station.prototype.setSVG = function(svg) {
         // this.fill('#ee0000');
     });
     this.svg.on('click', function() {
-        self.show_tweets();
+        if (self.notified) {
+            self.show_tweets();
+        } // if
     });
 }; // Station.setSVG
 
@@ -53,22 +55,61 @@ Station.prototype.setTag = function(tag) {
         self.removeClass('opaque');
     });
     tag.on('click', function() {
-        self.show_tweets();
+        if (self.notified) {
+            self.show_tweets();
+        } // if
     });
 };
 
 Station.prototype.addClass = function(class_name) {
-    this.svg.addClass(class_name);
+    this.svg.addClass(class_name + "_stroke");
     this.tag.addClass(class_name);
 };
 
 Station.prototype.removeClass = function(class_name) {
-    this.svg.removeClass(class_name);
+    this.svg.removeClass(class_name + "_stroke");
     this.tag.removeClass(class_name);
 };
 
 Station.prototype.show_tweets = function() {
-    
+    tweet_ids = tweet_ids_dict[this.name];
+    var dfd_arr = [];
+    for (var i = 0; i < tweet_ids.length; i++) {
+        var id_str = tweet_ids[i];
+        if (!(id_str in tweet_htmls)) {
+            var dfd = $.ajax({
+                url: oembed_url,
+                type: 'GET',
+                data: {
+                    'url': (status_base_url + id_str),
+                    'max_width': 325
+                },
+                dataType: 'json',
+            });
+            dfd_arr.push(dfd);
+        } // if
+    } // for
+    $.when.apply($, dfd_arr).done(function() {
+        for (var i = 0; i < arguments.length; i++) {
+            var status = arguments[i][1];
+            if (status == 'success') {
+                var json = arguments[i][0];
+                var html = json.html;
+                var id_str = /[^/]*$/.exec(json.url)[0];
+                tweet_htmls[id_str] = html;
+            } // if
+        } // for
+    });
+};
+
+Station.prototype.notify = function() {
+    this.notified = true;
+    this.svg.addClass('highlight');
+};
+
+Station.prototype.silence = function() {
+    this.notified = false;
+    this.svg.removeClass('highlight');
 };
 
 function Path(name, line_name, svg) {
@@ -117,6 +158,7 @@ function Line(name, group, color) {
     this.group = group;
     this.color = color;
     this.animated = false;
+    this.notified = false;
 //    this.ids = [];
 }
 
@@ -150,3 +192,13 @@ Line.prototype.stop = function() {
         this.animated = false;
     } // if
 };
+
+Line.prototype.notify = function() {
+    this.notified = true;
+};
+
+Line.prototype.silence = function() {
+    this.notified = false;
+};
+
+

@@ -108,7 +108,7 @@ def main():
                     trouble_lines.append(key)
 
     if len(trouble_lines) > 0:
-        trouble_entry = TrainTrouble(created_at=datetime.datetime.now(), lines=trouble_lines)
+        trouble_entry = TrainTrouble(created_at=datetime.now(), lines=trouble_lines)
         trouble_entry.save()
 
 
