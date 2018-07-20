@@ -217,3 +217,7 @@ $("button#time_button").click(function() {
         }
     });
 });
+
+$("#sidebar-toggle").on('click', function() {
+    $("#sidebar-content").toggle();
+});

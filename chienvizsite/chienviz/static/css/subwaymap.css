@@ -72,6 +72,7 @@ html, body {
     height: 100%;
     right: 0;
     top: 0;
+    z-index: 2000;
 } 
 
 #sidebar-toggle {
@@ -80,9 +81,10 @@ html, body {
 }
 
 #siderbar-content {
-    width: 500px;
+    width: 220px;
+    background: #ffffff;
+    display: none;
     /*height: 100%;*/
-    color: red;
 }
 
 .opaque {
@@ -116,3 +118,4 @@ html, body {
     0% {opacity:0.5;}
     100% {opacity:1;}
 }
+

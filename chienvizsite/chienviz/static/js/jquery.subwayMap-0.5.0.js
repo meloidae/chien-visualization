@@ -636,7 +636,7 @@ THE SOFTWARE.
             + "width:100px;"
             //+ "width: 40px;"
             //+ (pos != "" ? pos : "") + ";position:absolute;top:" + (y + el.offset().top - (topOffset > 0 ? topOffset : 0)) + "px;left:" + (x + el.offset().left) + "px;z-index:3000;'";
-            + (pos != "" ? pos : "") + ";position:absolute;top:" + (y) + "px;left:" + (x) + "px;z-index:3000;'";
+            + (pos != "" ? pos : "") + ";position:absolute;top:" + (y) + "px;left:" + (x) + "px;z-index:1000;'";
         var marker_tag;
         if (data.link != "")
             marker_tag = $("<a " + style + " title='" + data.title.replace(/\\n/g,"<br />") + "' href='" + data.link + "' target='_new'>" + data.label.replace(/\\n/g,"<br />") + "</span>");
