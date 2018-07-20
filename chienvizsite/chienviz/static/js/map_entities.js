@@ -109,8 +109,6 @@ Station.prototype.show_tweets = function() {
         $("#sidebar-content").html(tweet_stack);
         twttr.widgets.load(
             document.getElementById("sidebar-content")
-        ).then(
-            $("#sidebar-content").show();
         );
         //$("#sidebar-content").show();
     });
