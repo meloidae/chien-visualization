@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import datetime, json
 from .models import Tweet, TrainTrouble
+import requets
 
 # Create your views here.
 
