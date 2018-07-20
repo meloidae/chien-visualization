@@ -110,7 +110,7 @@ Station.prototype.show_tweets = function() {
         twttr.widgets.load(
             document.getElementById("sidebar-content")
         );
-        $("#sidebar-content").hide();
+        $("#sidebar-content").show();
     });
 };
 
