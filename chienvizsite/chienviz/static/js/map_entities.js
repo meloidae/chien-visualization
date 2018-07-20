@@ -84,7 +84,7 @@ Station.prototype.show_tweets = function() {
                     'url': (status_base_url + id_str),
                     'max_width': 325
                 },
-                dataType: 'json',
+                dataType: 'jsonp',
             });
             dfd_arr.push(dfd);
         } // if
