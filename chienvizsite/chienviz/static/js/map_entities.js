@@ -106,6 +106,9 @@ Station.prototype.show_tweets = function() {
         } // for
         console.log('done');
         $("#sidebar-content").html(tweet_stack);
+        twttr.widgets.load(
+            document.getElementById("sidebar-content")
+        );
     });
 };
 
