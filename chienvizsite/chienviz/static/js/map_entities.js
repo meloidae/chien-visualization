@@ -82,7 +82,8 @@ Station.prototype.show_tweets = function() {
                 type: 'GET',
                 data: {
                     'url': (status_base_url + id_str),
-                    'max_width': 325
+                    'max_width': 220,
+                    'omit_script': true
                 },
                 dataType: 'jsonp',
             });
