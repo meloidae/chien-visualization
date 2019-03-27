@@ -4,6 +4,8 @@ Copyright (c) 2010 Nik Kalyani nik@kalyani.com http://www.kalyani.com
 
 Modified work Copyright (c) 2016 Jon Burrows subwaymap@jonburrows.co.uk https://jonburrows.co.uk
 
+Modified by meloidae 2018 to replace canvas with svg
+
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
